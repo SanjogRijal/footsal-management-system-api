@@ -1,5 +1,5 @@
 import { registerAs } from '@nestjs/config';
-import { Players } from 'src/modules/players/entities/index.entity';
+import { PlayersEntity } from 'src/modules/players/entities/index.entity';
 
 const dbConfig = () => ({
   type: process.env.DB_TYPE as 'postgres',
@@ -9,7 +9,7 @@ const dbConfig = () => ({
   password: process.env.DB_PASSWORD,
   database: process.env.DATABASE,
   synchronize: process.env.DB_SYNCHRONIZE || false,
-  entities: [Players],
+  entities: [PlayersEntity],
 });
 
 export default registerAs('dbConfig', dbConfig);
