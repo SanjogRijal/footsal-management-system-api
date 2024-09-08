@@ -1,10 +1,10 @@
-import { Controller, Get } from '@nestjs/common';
-import { Request, Response } from 'express';
+import { Controller, Get, Request } from '@nestjs/common';
+import { Request as ExpressRequest, Response } from 'express';
 
 @Controller('players')
 export class PlayersController {
   @Get('')
-  getAllPlayers(request: Request, response: Response) {
+  getAllPlayers(@Request() request: ExpressRequest, response: Response) {
     response.json({
       data: 'hello world',
     });
