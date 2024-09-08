@@ -15,16 +15,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService): Promise<any> => {
-        console.log({
-          type: configService?.get('dbConfig.type'),
-          host: configService?.get('dbConfig.host'),
-          port: configService?.get('dbConfig.port'),
-          username: configService?.get('dbConfig.username'),
-          password: configService?.get('dbConfig.password'),
-          database: configService?.get('dbConfig.database'),
-          entities: [],
-          synchronize: configService.get('dbConfig.synchronize'),
-        });
         return {
           type: configService?.get('dbConfig.type'),
           host: configService?.get('dbConfig.host'),
