@@ -8,7 +8,7 @@ const dbConfig = () => ({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DATABASE,
-  synchronize: process.env.DB_SYNCHRONIZE || false,
+  synchronize: process.env.DB_SYNCHRONIZE || true,
   entities: [PlayersEntity],
 });
 

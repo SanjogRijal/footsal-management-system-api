@@ -11,9 +11,7 @@ export class PlayersEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({
-    type: 'string',
-  })
+  @Column()
   name: string;
 
   @Column()

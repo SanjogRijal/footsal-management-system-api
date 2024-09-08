@@ -5,9 +5,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import dbConfig from './config/dbConfig';
 import serverConfig from './config/serverConfig';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PlayersModule } from './modules/players/players.module';
 
 @Module({
   imports: [
+    PlayersModule,
     ConfigModule.forRoot({
       envFilePath: ['.env'],
       load: [serverConfig, dbConfig],
@@ -22,7 +24,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
           username: configService?.get('dbconfig.username'),
           password: configService?.get('dbconfig.password'),
           database: configService?.get('dbConfig.database'),
-          entities: [],
+          entities: configService.get('dbConfig.entities'),
           synchronize: configService.get('dbConfig.synchronize'),
         };
       },
