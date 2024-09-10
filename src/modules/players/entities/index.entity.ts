@@ -6,6 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity('players')
@@ -22,7 +23,14 @@ export class PlayersEntity {
   @Column()
   joiningDate: Date;
 
+  @Column({
+    nullable: true,
+    type: 'int',
+  })
+  rating: number;
+
   @OneToMany(() => TeamPlayersEntity, (teamPlayer) => teamPlayer.id)
+  @JoinColumn()
   teamPlayers: TeamPlayersEntity[];
 
   @CreateDateColumn()

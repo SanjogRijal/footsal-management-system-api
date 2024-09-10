@@ -2,15 +2,22 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { TeamsEntity } from './entities/team.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TeamsService {
-  create(_createTeamDto: CreateTeamDto) {
-    return 'This action adds a new team';
+  constructor(
+    @InjectRepository(TeamsEntity)
+    private readonly teamEntity: Repository<TeamsEntity>,
+  ) {}
+  async create(_createTeamDto: CreateTeamDto) {
+    return await this.teamEntity.save(_createTeamDto);
   }
 
-  findAll() {
-    return `This action returns all teams`;
+  async findAll() {
+    return await this.teamEntity.find();
   }
 
   findOne(id: number) {

@@ -6,10 +6,14 @@ import dbConfig from './config/dbConfig';
 import serverConfig from './config/serverConfig';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PlayersModule } from './modules/players/players.module';
+import { TeamsModule } from './modules/teams/teams.module';
+import { TeamPlayersModule } from './modules/team_players/team_players.module';
 
 @Module({
   imports: [
     PlayersModule,
+    TeamsModule,
+    TeamPlayersModule,
     ConfigModule.forRoot({
       envFilePath: ['.env'],
       load: [serverConfig, dbConfig],

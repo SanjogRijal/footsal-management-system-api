@@ -1,9 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
-// import {
-//   Request as ExpressRequest,
-//   Response as ExpressResponse,
-// } from 'express';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpException,
+  HttpStatus,
+  Post,
+} from '@nestjs/common';
+
 import { PlayersService } from '../service/players/players.service';
+import CreatePlayersDTO from '../dto/players.dto';
 
 @Controller('players')
 export class PlayersController {
@@ -12,12 +17,28 @@ export class PlayersController {
   async getAllPlayers() {
     try {
       const players = await this.service.getAllPlayers();
+      const distributedTeams =
+        await this.service.distributePlayers('Friday Footsal');
+      console.log(distributedTeams);
       return {
         status: 200,
         data: players,
       };
     } catch (err) {
-      return { status: 400, err: err?.response?.message };
+      throw new HttpException('error' + err, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  @Post()
+  async addPlayer(@Body() body: CreatePlayersDTO) {
+    try {
+      const addedPlayer = await this.service.addPlayer(body);
+      return addedPlayer;
+    } catch (error) {
+      throw new HttpException(
+        'Server Error ' + error,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 }
