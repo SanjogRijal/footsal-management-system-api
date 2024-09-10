@@ -17,9 +17,9 @@ export class PlayersController {
   async getAllPlayers() {
     try {
       const players = await this.service.getAllPlayers();
-      const distributedTeams =
-        await this.service.distributePlayers('Friday Footsal');
-      console.log(distributedTeams);
+      // const distributedTeams =
+      //   await this.service.distributePlayers('Friday Footsal');
+      // console.log(distributedTeams);
       return {
         status: 200,
         data: players,
